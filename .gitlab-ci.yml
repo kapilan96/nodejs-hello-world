@@ -1,0 +1,14 @@
+stages:
+  - install
+  - test
+  - save
+ 
+install_deps:
+  stage: install
+  script:
+    - npm install
+ 
+run_tests:
+  stage: test
+  script:
+    - npm test
