@@ -1,11 +1,15 @@
 pipeline {
-    agent any
+    environment {
+        NODE_VERSION = "20"
+    }
 
     stages {
-        stage('Check npm path') {
+        stage('Setup Node.js') {
             steps {
-                sh 'which npm'
-                sh 'npm -v'
+                script {
+                    def nodeHome = tool name: "nodejs-${NODE_VERSION}", type: "jenkins.plugins.nodejs.tools.NodeJSInstallation"
+                    env.PATH = "${nodeHome}/bin:${env.PATH}"
+                }
             }
         }
 
