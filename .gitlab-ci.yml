@@ -9,7 +9,10 @@ install_deps:
   stage: install
   script:
     - npm install
- 
+cache:
+paths:
+- nodes_modules/
+
 run_tests:
   stage: test
   script:
