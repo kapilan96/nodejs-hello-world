@@ -1,6 +1,12 @@
 pipeline {
+    agent any  
+
     environment {
         NODE_VERSION = "20"
+    }
+
+    tools {
+        nodejs "nodejs-${NODE_VERSION}"  
     }
 
     stages {
@@ -10,23 +16,19 @@ pipeline {
                     def nodeHome = tool name: "nodejs-${NODE_VERSION}", type: "jenkins.plugins.nodejs.tools.NodeJSInstallation"
                     env.PATH = "${nodeHome}/bin:${env.PATH}"
                 }
+                sh 'node -v'
+                sh 'npm -v'
             }
         }
 
         stage('Install dependencies') {
             steps {
-                script {
-                    env.PATH = "${env.PATH}:/opt/homebrew/bin"
-                }
                 sh 'npm install'
             }
         }
 
         stage('Run tests') {
             steps {
-                script {
-                    env.PATH = "${env.PATH}:/opt/homebrew/bin"
-                }
                 sh 'npm test'
             }
         }
