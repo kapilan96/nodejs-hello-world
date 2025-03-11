@@ -1,8 +1,8 @@
 pipeline {
-    agent any  // Assure l'exécution sur n'importe quel agent
+    agent any  // Définit un agent pour exécuter le pipeline
 
     tools {
-        nodejs "NodeJS 20.0.0"  // Utilise le même nom que celui défini dans Jenkins
+        nodejs "NodeJS"  // ✅ Change "NodeJS 20.0.0" par "NodeJS"
     }
 
     stages {
