@@ -1,21 +1,13 @@
 pipeline {
-    agent any  
-
-    environment {
-        NODE_VERSION = "20"
-    }
+    agent any  // Assure l'exécution sur n'importe quel agent
 
     tools {
-        nodejs "nodejs-${NODE_VERSION}"  
+        nodejs "NodeJS 20.0.0"  // Utilise le même nom que celui défini dans Jenkins
     }
 
     stages {
-        stage('Setup Node.js') {
+        stage('Check NodeJS') {
             steps {
-                script {
-                    def nodeHome = tool name: "nodejs-${NODE_VERSION}", type: "jenkins.plugins.nodejs.tools.NodeJSInstallation"
-                    env.PATH = "${nodeHome}/bin:${env.PATH}"
-                }
                 sh 'node -v'
                 sh 'npm -v'
             }
