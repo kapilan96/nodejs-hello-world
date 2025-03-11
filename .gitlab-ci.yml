@@ -4,16 +4,21 @@ stages:
   - install
   - test
   - save
- 
+
 install_deps:
   stage: install
   script:
     - npm install
-cache:
-paths:
-- nodes_modules/
+  cache:
+    key: npm-cache
+    paths:
+      - node_modules/
 
 run_tests:
   stage: test
   script:
     - npm test
+  cache:
+    key: npm-cache
+    paths:
+      - node_modules/
